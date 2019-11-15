@@ -56,5 +56,18 @@
     <menuitem name="Server to list" id="create_many" parent="create_many.menu_2"
               action="create_many.action_server"/>
     -->
+
+
+    <record id="crm_lead_view_form" model="ir.ui.view">
+      <field name="name">crm.lead.form.create_many</field>
+      <field name="model">crm.lead</field>
+      <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//header" position="inside">
+          <button name="action_populate" string="Fill table" type="object" />
+        </xpath>
+      </field>
+    </record>
+
   </data>
 </odoo>
