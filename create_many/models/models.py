@@ -24,20 +24,22 @@ class Lead(models.Model):
     def action_populate(self):
         #once
         import uuid
-        partners = self.env["res.partner"].search_read(fields=["id"],limit=1000)
+        partners = self.env["res.partner"].search_read([], limit=1000)
         teams = self.env["crm.team"].search_read(fields=["id"], limit=1000)
+        stages = self.env["crm.stage"].search_read(fields=["id"], limit=1000)
 
-        for i in range(1000):
+        for i in range(10000):
             #per iteration
-            day = randint(1,27)
-            month = randint(1,12)
-            year = randint(2010,date.today().year)
+            day = randint(1, 27)
+            month = randint(1, 12)
+            year = randint(2010, date.today().year)
             created = self.env['crm.lead'].create({
-                "name": "gen "+ str(i) + "/" + str(uuid.uuid4()),
+                "name": "gen " + str(i) + "/" + str(uuid.uuid4()),
                 "partner_id": choice(partners)["id"],
-                "planned_revenue": randint(2000,1000000),
-                "create_date": date(year,month,day),
+                "planned_revenue": randint(2000, 1000000),
+                "create_date": date(year, month, day),
                 "team_id": choice(teams)["id"],
+                "stage_id": choice(stages)["id"],
             })
-            updateDate = """update crm_lead set create_date = '%s' where id = %s"""%(date(year, month,day), created.id)
+            updateDate = """update crm_lead set create_date = '%s' where id = %s""" % (date(year, month, day), created.id)
             self.env.cr.execute(updateDate)
