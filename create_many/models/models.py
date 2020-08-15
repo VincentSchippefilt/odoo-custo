@@ -36,7 +36,7 @@ class Lead(models.Model):
             created = self.env['crm.lead'].create({
                 "name": "gen " + str(i) + "/" + str(uuid.uuid4()),
                 "partner_id": choice(partners)["id"],
-                "planned_revenue": randint(2000, 1000000),
+                "expected_revenue": randint(2000, 1000000),
                 "create_date": date(year, month, day),
                 "team_id": choice(teams)["id"],
                 "stage_id": choice(stages)["id"],
